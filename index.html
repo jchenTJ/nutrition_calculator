@@ -5,63 +5,113 @@
     <link rel="stylesheet" href="style.css">
     <script src= "https://connect.calcapp.net/calcapp-iframe.js">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/openai/src/index.js"></script>
   </head>
   <body>
-
-    <h>Wow look at this isnt this so cool</h>
-    <br>
-
     <iframe seamless
         allow="clipboard-write"
         src="https://connect.calcapp.net/?app=8hoygo"
         style="width: 500px;
-               height: 600px;">
+            height: 700px;"
+        calcapp-managed-height>
     </iframe>
-    <br>
-    <h3>Pie Chart</h3>
-    <div class="piechart"></div>
-    <button onclick="breakfast()">Breakfast Info</button>
-    <button onclick="lunch()">Lunch Info</button>
-    <button onclick="dinner()">Dinner Info</button>
-    <button onclick="snack()">Snack Info</button>
-    <p id="line1">Protien Grams: -</p>
-    <p id="line2">Carbs Grams: -</p>
-    <p id="line3">Fat Grams: -</p>
-    <br><br><br><br>
+    <table>
+        <tr>
+            <th>Total</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Snack</th>
+            <th>Dinner</th>
+        </tr>
+        <tr>
+            <td>
+                <p id="totalPRO">Protein Grams: -</p>
+                <p id="totalCAR">Carbs Grams: -</p>
+                <p id="totalGRA">Fat Grams: -</p>
+                <p id="totalCAL">Breakfast Calories: -</p>
+            </td>
+            <td>
+                <p id="breakfastPRO">Protein Grams: -</p>
+                <p id="breakfastCAR">Carbs Grams: -</p>
+                <p id="breakfastGRA">Fat Grams: -</p>
+                <p id="breakfastCAL">Breakfast Calories: -</p>
+            </td>
+            <td>
+                <p id="lunchPRO">Protein Grams: -</p>
+                <p id="lunchCAR">Carbs Grams: -</p>
+                <p id="lunchGRA">Fat Grams: -</p>
+                <p id="lunchCAL">Lunch Calories: -</p>
+            </td>
+            <td>
+                <p id="snackPRO">Protein Grams: -</p>
+                <p id="snackCAR">Carbs Grams: -</p>
+                <p id="snackGRA">Fat Grams: -</p>
+                <p id="snackCAL">Snack Calories: -</p>
+            </td>
+            <td>
+                <p id="dinnerPRO">Protein Grams: -</p>
+                <p id="dinnerCAR">Carbs Grams: -</p>
+                <p id="dinnerGRA">Fat Grams: -</p>
+                <p id="dinnerCAL">Dinner Calories: -</p>
+            </td>
+        </tr>
+    </table>
     
     <script>
+        setInterval(function(){ 
+            refresh();    
+        }, 1000);
         function customRound(value){
             value = value * 10;
             value = Math.floor(value, 1);
             value = value / 10
             return value
         }
+        function refresh(){
+            total();
+            breakfast();
+            lunch();
+            snack();
+            dinner();
+        }
+        function total(){
+            var cen = calcappIframe.getValue("MainPage", "TDEE").then(function(value) {
+                document.getElementById("totalPRO").innerHTML = "Protein Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("totalCAR").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("totalGRA").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("totalCAL").innerHTML = "Calories: " + customRound(value);
+            })
+        }
         function breakfast(){
             var cen = calcappIframe.getValue("MainPage", "BreakfastCal").then(function(value) {
-                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
-                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
-                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("breakfastPRO").innerHTML = "Protein Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("breakfastCAR").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("breakfastGRA").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("breakfastCAL").innerHTML = "Calories: " + customRound(value);
             })
         }
         function lunch(){
             var cen = calcappIframe.getValue("MainPage", "LunchCal").then(function(value) {
-                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
-                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
-                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("lunchPRO").innerHTML = "Protein Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("lunchCAR").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("lunchGRA").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("lunchCAL").innerHTML = "Calories: " + customRound(value);
             })
         }
         function dinner(){
             var cen = calcappIframe.getValue("MainPage", "DinnerCal").then(function(value) {
-                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
-                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
-                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("dinnerPRO").innerHTML = "Protein Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("dinnerCAR").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("dinnerGRA").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("dinnerCAL").innerHTML = "Calories: " + customRound(value);
             })
         }
         function snack(){
             var cen = calcappIframe.getValue("MainPage", "SnackCal").then(function(value) {
-                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
-                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
-                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("snackPRO").innerHTML = "Protein Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("snackCAR").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("snackGRA").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+                document.getElementById("snackCAL").innerHTML = "Calories: " + customRound(value);
             })
         }
     </script>

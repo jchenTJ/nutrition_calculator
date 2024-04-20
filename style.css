@@ -3,8 +3,27 @@
     height: 200px;
     border-radius: 50%;
     background-image: conic-gradient(
-        pink 180deg,
-        lightblue 0 235deg,
+        pink 108deg,
+        lightblue 0 252deg,
         orange 0 0deg
     );
+}
+iframe{
+    float:right;
+}
+th, td{
+    padding: 12px;
+    font-size: 30px;
+}
+body {
+    background: #1d204f;
+    font-family:sans-serif;
+    color:#fff;
+    margin-left: -10;
+    border-width: 0;
+    left:0;
+}
+p{
+    color:#fff;
+    font-size: 20px;
 }
