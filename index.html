@@ -10,8 +10,7 @@
 
     <h>Wow look at this isnt this so cool</h>
     <br>
-<!-- Add this markup to your HTML file where you'd like to embed your app: -->
-<!-- Add this markup to your HTML file where you'd like to embed your app: -->
+
     <iframe seamless
         allow="clipboard-write"
         src="https://connect.calcapp.net/?app=8hoygo"
@@ -21,17 +20,50 @@
     <br>
     <h3>Pie Chart</h3>
     <div class="piechart"></div>
-    <button onclick="test()">Click me</button>
+    <button onclick="breakfast()">Breakfast Info</button>
+    <button onclick="lunch()">Lunch Info</button>
+    <button onclick="dinner()">Dinner Info</button>
+    <button onclick="snack()">Snack Info</button>
+    <p id="line1">Protien Grams: -</p>
+    <p id="line2">Carbs Grams: -</p>
+    <p id="line3">Fat Grams: -</p>
+    <br><br><br><br>
+    
     <script>
-        function test(){
+        function customRound(value){
+            value = value * 10;
+            value = Math.floor(value, 1);
+            value = value / 10
+            return value
+        }
+        function breakfast(){
             var cen = calcappIframe.getValue("MainPage", "BreakfastCal").then(function(value) {
-                console.log("Breakfast: " + value);
-                console.log("Protien Grams: " + (value * 0.3 / 4));
-                console.log("Carbs Grams: " + (value * 0.4 / 4));
-                console.log("Fat Grams: " + (value * 0.3 / 9));
+                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+            })
+        }
+        function lunch(){
+            var cen = calcappIframe.getValue("MainPage", "LunchCal").then(function(value) {
+                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+            })
+        }
+        function dinner(){
+            var cen = calcappIframe.getValue("MainPage", "DinnerCal").then(function(value) {
+                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
+            })
+        }
+        function snack(){
+            var cen = calcappIframe.getValue("MainPage", "SnackCal").then(function(value) {
+                document.getElementById("line1").innerHTML = "Protien Grams: " + customRound(value * 0.3 / 4);
+                document.getElementById("line2").innerHTML = "Carbs Grams: " + customRound(value * 0.4 / 4);
+                document.getElementById("line3").innerHTML = "Fat Grams: " + customRound(value * 0.3 / 9);
             })
         }
     </script>
-
   </body>
 </html>

@@ -3,8 +3,8 @@
     height: 200px;
     border-radius: 50%;
     background-image: conic-gradient(
-        pink 70deg,
+        pink 180deg,
         lightblue 0 235deg,
-        orange 0
+        orange 0 0deg
     );
 }
